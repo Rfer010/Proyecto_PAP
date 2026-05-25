@@ -1,8 +1,9 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-
 package jerarquia_empleados;
+
+import java.util.Scanner;
 
 /**
  *
@@ -11,6 +12,78 @@ package jerarquia_empleados;
 public class Jerarquia_empleados {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        //autoreferencia para usar metodos de la misma clase
+        Jerarquia_empleados inicio = new Jerarquia_empleados();
+        // definicion de clase de entrada de datos por consola
+        Scanner teclado = new Scanner(System.in);
+        // definicion de variables para controlar el flujo de las estructuras repetitivas
+        boolean continuar = false;
+        boolean entrada_valida = true;
+
+        // flujo principal
+        do {
+            inicio.Mostrar_menu();
+            int opcion = teclado.nextInt();
+
+            while (entrada_valida == true) {
+                entrada_valida = inicio.Validar_opcion(opcion);
+            }
+
+            inicio.Realizar_opcion(opcion);
+            
+            System.out.println();
+            System.out.println("¿Desea Realizar otra operación? (y/n)");
+            teclado.nextLine();
+            String eleccion = teclado.nextLine();
+            continuar = inicio.Continuar_programa(eleccion);//hacer un ciclo repetitivo.
+
+        } while (continuar == true);
+
+    }
+
+    private void Mostrar_menu() {
+        System.out.println("-------------Empresa [XS]-------------");
+        System.out.println("MENú OPCIONES");
+        System.out.println("1 - Ordenar empleados alfabeticamente segun primer apellido");
+        System.out.println("2 - Ordenar empleados  por sueldo");
+        System.out.println("3 - Mostrar cantidad de empleados segun sus roles");
+    }
+
+    private void Realizar_opcion(int opcion) {
+
+        switch (opcion) {
+            case 1:
+                System.out.println("Eleccion 1");
+                break;
+            case 2:
+                System.out.println("Eleccion 2");
+                break;
+            case 3:
+                System.out.println("Eleccion 3");
+                break;
+            default:
+                System.out.println("Fallo");
+                break;
+        }
+    }
+
+    private boolean Validar_opcion(int opcion) {
+        if (opcion > 3 || opcion < 1) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean Continuar_programa(String eleccion) {
+        String eleccion_lowercase = eleccion.toLowerCase();
+        if (eleccion_lowercase.equals("y")) {
+            try {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } catch (Exception e) {
+                
+            }
+            return true;
+        }
+        return false;
     }
 }
