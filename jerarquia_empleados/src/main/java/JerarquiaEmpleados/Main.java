@@ -9,11 +9,11 @@ import java.util.Scanner;
  *
  * @author ferna
  */
-public class Jerarquia_empleados {
+public class Main {
 
     public static void main(String[] args) {
         //autoreferencia para usar metodos de la misma clase
-        Jerarquia_empleados inicio = new Jerarquia_empleados();
+        Main inicio = new Main();
         // definicion de clase de entrada de datos por consola
         Scanner teclado = new Scanner(System.in);
         // definicion de variables para controlar el flujo de las estructuras repetitivas
