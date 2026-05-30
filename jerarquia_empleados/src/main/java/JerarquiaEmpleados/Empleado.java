@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package jerarquia_empleados;
+package JerarquiaEmpleados;
 
 import java.time.LocalDate;// importación para el ingreso valido de fechas de nacimiento.
 
