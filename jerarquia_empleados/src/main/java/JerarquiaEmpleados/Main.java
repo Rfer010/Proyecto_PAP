@@ -20,6 +20,9 @@ public class Main {
         boolean continuar = false;
         boolean entrada_valida = true;
 
+        
+        
+        
         // flujo principal
         do {
             inicio.Mostrar_menu();
