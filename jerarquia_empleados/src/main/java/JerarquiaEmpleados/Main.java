@@ -42,11 +42,12 @@ public class Main {
     }
 
     private void Mostrar_menu() {
-        System.out.println("-------------Empresa [XS]-------------");
-        System.out.println("MENú OPCIONES");
-        System.out.println("1 - Ordenar empleados alfabeticamente segun primer apellido");
-        System.out.println("2 - Ordenar empleados  por sueldo");
-        System.out.println("3 - Mostrar cantidad de empleados segun sus roles");
+        System.out.println("-------------Empresa Automotriz [PERFECT CAR]-------------");
+        System.out.println("MENÚ OPCIONES:");
+        System.out.println("1 - Ordenar y mostrar empleados alfabeticamente segun primer apellido.");
+        System.out.println("2 - Ordenar y mostrar empleados  por sueldo.");
+        System.out.println("3 - Mostrar cantidad de empleados según sus roles.");
+        System.out.println("4 - salir.");
     }
 
     private void Realizar_opcion(int opcion) {
