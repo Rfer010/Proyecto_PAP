@@ -22,6 +22,7 @@ public abstract class Empleado {
 
     public Empleado(String nombre, String apellido, String direccion, LocalDate fechaNacimiento, String sexo) {
         this.nombre = nombre;
+        this.apellido = apellido;
         this.direccion = direccion;
         this.fechaNacimiento = fechaNacimiento;
         this.sexo = sexo;

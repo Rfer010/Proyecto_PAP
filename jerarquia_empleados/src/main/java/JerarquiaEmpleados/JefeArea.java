@@ -14,10 +14,11 @@ import java.time.LocalDate;// importación para el ingreso valido de fechas de n
 public class JefeArea extends Empleado {
     public JefeArea(String nombre, String apellido, String direccion, LocalDate fechaNacimiento, String sexo){
         super(nombre, apellido, direccion, fechaNacimiento, sexo);
+        this.salarioBase = 1500.00;
     }
     
     @Override
     public String GetRolEmpleado(){
-        return "Tecnico";
+        return "Jefe de Area";
     }
 }

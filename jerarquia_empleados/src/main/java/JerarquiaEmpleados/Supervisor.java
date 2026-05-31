@@ -15,11 +15,12 @@ public class Supervisor extends Empleado{
     
     public Supervisor(String nombre, String apellido, String direccion, LocalDate fechaNacimiento, String sexo){
         super(nombre, apellido, direccion, fechaNacimiento, sexo);
+        this.salarioBase = 750.00;
     }
     
     @Override
     public String GetRolEmpleado(){
-        return "Tecnico";
+        return "Supervisor";
     }
     
 }

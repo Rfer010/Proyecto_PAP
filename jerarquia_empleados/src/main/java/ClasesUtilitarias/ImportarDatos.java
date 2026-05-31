@@ -5,6 +5,7 @@
 package ClasesUtilitarias;
 // importaciones de las clases para dividirlas en base a su tipo de rol
 
+import JerarquiaEmpleados.Empleado;
 import JerarquiaEmpleados.Gerente;
 import JerarquiaEmpleados.JefeArea;
 import JerarquiaEmpleados.Supervisor;
@@ -20,11 +21,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImportarDatos<T> {
+public class ImportarDatos {
 
-    public List<T> ImportarEmpleados(String direccionArchivo) {
+    public List<Empleado> ImportarEmpleados(String direccionArchivo) {
         // lista para guardar todos los objetos
-        List<T> empleados = new ArrayList<>();
+        List<Empleado> empleados = new ArrayList<>();
         //usamos try-buffer-resources para abrir y cerrar automaticamente el archivo
         try (BufferedReader br = new BufferedReader(new FileReader(direccionArchivo))) {
 
@@ -50,19 +51,19 @@ public class ImportarDatos<T> {
                 switch (rolEmpleado) {
                     case "Gerente":
                         Gerente gerente = new Gerente(nombre, apellido, direccion, fechaNacimiento, sexo);
-                        empleados.add((T) gerente);
+                        empleados.add(gerente);
                         break;
                     case "Tecnico":
                         Tecnico tecnico = new Tecnico(nombre, apellido, direccion, fechaNacimiento, sexo);
-                        empleados.add((T) tecnico);
+                        empleados.add(tecnico);
                         break;
                     case "Jefe de Area":
                         JefeArea jefeArea = new JefeArea(nombre, apellido, direccion, fechaNacimiento, sexo);
-                        empleados.add((T) jefeArea);
+                        empleados.add(jefeArea);
                         break;
                     case "Supervisor":
                         Supervisor supervisor = new Supervisor(nombre, apellido, direccion, fechaNacimiento, sexo);
-                        empleados.add((T) supervisor);
+                        empleados.add(supervisor);
                         break;
                     default :
                         System.out.print("No se ha encontrado nada");

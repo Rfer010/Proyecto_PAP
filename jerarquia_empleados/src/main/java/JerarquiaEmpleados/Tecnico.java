@@ -15,6 +15,7 @@ public class Tecnico extends Empleado {
     
     public Tecnico(String nombre, String apellido, String direccion, LocalDate fechaNacimiento, String sexo){
         super(nombre, apellido, direccion, fechaNacimiento, sexo);
+        this.salarioBase = 350.00;
     }
     
     @Override

@@ -4,7 +4,9 @@
 package JerarquiaEmpleados;
 
 import java.util.Scanner;
-
+import ClasesUtilitarias.ImportarDatos;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author ferna
@@ -19,11 +21,18 @@ public class Main {
         // definicion de variables para controlar el flujo de las estructuras repetitivas
         boolean continuar = false;
         boolean entrada_valida = true;
-
         
+        // crear nuevo objeto para llenar la lista de empleados segun rol
+        //ruta de archivo ../DatosEmpleados/DatosEmpleados.csv
+        ImportarDatos importacion = new ImportarDatos();
+        List<Empleado> empleados = new ArrayList<>();
         
+        empleados = importacion.ImportarEmpleados("..//DatosEmpleados//DatosEmpleados.csv");
+        //funcion para mostrar los empleados
+        inicio.MostrarEmpleados(empleados);
         
         // flujo principal
+        /*
         do {
             inicio.Mostrar_menu();
             int opcion = teclado.nextInt();
@@ -41,9 +50,10 @@ public class Main {
             continuar = inicio.Continuar_programa(eleccion);//hacer un ciclo repetitivo.
 
         } while (continuar == true);
-
+        */
     }
 
+    // mostrar el menu de opciones
     private void Mostrar_menu() {
         System.out.println("-------------Empresa Automotriz [PERFECT CAR]-------------");
         System.out.println("MENÚ OPCIONES:");
@@ -53,6 +63,7 @@ public class Main {
         System.out.println("4 - salir.");
     }
 
+    //realizar las opcciones segun menu de opciones
     private void Realizar_opcion(int opcion) {
 
         switch (opcion) {
@@ -71,6 +82,7 @@ public class Main {
         }
     }
 
+    //funcion para validar que la opcion este dentro del rango
     private boolean Validar_opcion(int opcion) {
         if (opcion > 3 || opcion < 1) {
             return true;
@@ -78,6 +90,7 @@ public class Main {
         return false;
     }
 
+    //funcion para verificar la continuidad de la app y limpiar pantalla
     private boolean Continuar_programa(String eleccion) {
         String eleccion_lowercase = eleccion.toLowerCase();
         if (eleccion_lowercase.equals("y")) {
@@ -89,5 +102,23 @@ public class Main {
             return true;
         }
         return false;
+    }
+    
+    //funcion para mostrar la lista de empleados
+    private void MostrarEmpleados(List<Empleado> empleados){
+        int contador=0;
+        System.out.println("Nombres |Apellido |Direccion |Fecha de Nacimiento |Sexo |Rol");
+        for(Empleado cadaEmpleado : empleados){
+            System.out.print(cadaEmpleado.GetNombre() + " - ");
+            System.out.print(cadaEmpleado.GetApellido() + " - ");
+            //System.out.print(cadaEmpleado.GetDireccion() + " - ");
+            //System.out.print(cadaEmpleado.GetFechaNacimiento() + " - ");
+            //System.out.print(cadaEmpleado.GetSexo() + " - ");
+            System.out.print(cadaEmpleado.GetRolEmpleado() + " - ");
+            System.out.print("$" + cadaEmpleado.GetSalarioNeto()+ " - ");
+            System.out.print("$" + cadaEmpleado.salarioBase + " - ");
+            System.out.println("AFP %" + cadaEmpleado.DescuentoAFP()+ " ");
+            
+        }
     }
 }
