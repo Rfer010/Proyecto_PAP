@@ -21,8 +21,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+//importar clases para ordernar los objetos
 public class ImportarDatos {
 
+    // metodo para realizar importacion de los datos desde un archivo externo
     public List<Empleado> ImportarEmpleados(String direccionArchivo) {
         // lista para guardar todos los objetos
         List<Empleado> empleados = new ArrayList<>();
@@ -46,7 +48,7 @@ public class ImportarDatos {
                 LocalDate fechaNacimiento = LocalDate.parse(textoDividido[3]);
                 String sexo = textoDividido[4];
                 String rolEmpleado = textoDividido[5];
-                
+
                 // Segun el tipo de rol crear nuevos objetos y almacenarlos en una lista
                 switch (rolEmpleado) {
                     case "Gerente":
@@ -65,8 +67,8 @@ public class ImportarDatos {
                         Supervisor supervisor = new Supervisor(nombre, apellido, direccion, fechaNacimiento, sexo);
                         empleados.add(supervisor);
                         break;
-                    default :
-                        System.out.print("No se ha encontrado nada");
+                    default:
+                        System.out.print("No se ha encontrado el rol");
                         break;
 
                 }
@@ -77,6 +79,66 @@ public class ImportarDatos {
         }
         // el metodo devuelve la clase de empleados
         return empleados;
-
     }
+
+    // metodo para imprimir los objetos extraidos en consola
+    public void MostrarEmpleados(List<Empleado> empleados) {
+        System.out.println("Nombres       | Apellido    | Direccion     | Fecha de Nacimiento | Sexo    |   Rol    |   Salario ");
+        for (Empleado cadaEmpleado : empleados) {
+            System.out.print(cadaEmpleado.GetNombre() + "  -  ");
+            System.out.print(cadaEmpleado.GetApellido() + "  -  ");
+            System.out.print(cadaEmpleado.GetDireccion() + "  -  ");
+            System.out.print(cadaEmpleado.GetFechaNacimiento() + "  -  ");
+            System.out.print(cadaEmpleado.GetSexo() + "  -  ");
+            System.out.print(cadaEmpleado.GetRolEmpleado()+ "  -  ");
+            System.out.println(cadaEmpleado.GetSalarioNeto());
+        }
+    }
+
+    // metodo para ordenar la lista de objetos(empleados) alfabaticamente segun apellido
+    public List<Empleado> OrdenarEmpleados(List<Empleado> empleados) {
+
+        char[] alfabeto = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+        List<Empleado> listaOrdenada = new ArrayList<>();
+
+        for (int i = 0; i < alfabeto.length; i++) {
+            for (Empleado cadaEmpleado : empleados) {
+                char[] apellido = cadaEmpleado.GetApellido().toCharArray();
+                if (apellido[0] == alfabeto[i]) {
+                    listaOrdenada.add(cadaEmpleado);
+                }
+            }
+        }
+        return listaOrdenada;
+    }
+
+    // metodo para ordenar la lista de empleados por salario neto de mayor a menor
+    public List<Empleado> OrdernarEmpleadosSalario(List<Empleado> empleados) {
+        List<Empleado> listaOrdenadaSalario = new ArrayList<>();
+        List<Empleado> salarioBajo = new ArrayList<>();
+        List<Empleado> salarioMedioBajo = new ArrayList<>();
+        List<Empleado> salarioMedio = new ArrayList<>();
+        List<Empleado> salarioAlto = new ArrayList<>();
+
+        for (Empleado cadaEmpleado : empleados) {
+            if (cadaEmpleado.GetSalarioNeto() <= 350) {
+                salarioBajo.add(cadaEmpleado);
+            } else if (cadaEmpleado.GetSalarioNeto() <= 750) {
+                salarioMedioBajo.add(cadaEmpleado);
+            } else if (cadaEmpleado.GetSalarioNeto() <= 1500) {
+                salarioMedio.add(cadaEmpleado);
+            } else {
+                salarioAlto.add(cadaEmpleado);
+            }
+        }
+        //unir todas las listas
+
+        listaOrdenadaSalario.addAll(salarioAlto);
+        listaOrdenadaSalario.addAll(salarioMedio);
+        listaOrdenadaSalario.addAll(salarioMedioBajo);
+        listaOrdenadaSalario.addAll(salarioBajo);
+
+        return listaOrdenadaSalario;
+    }
+
 }

@@ -7,6 +7,7 @@ import java.util.Scanner;
 import ClasesUtilitarias.ImportarDatos;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author ferna
@@ -16,23 +17,25 @@ public class Main {
     public static void main(String[] args) {
         //autoreferencia para usar metodos de la misma clase
         Main inicio = new Main();
+        
         // definicion de clase de entrada de datos por consola
         Scanner teclado = new Scanner(System.in);
+        
         // definicion de variables para controlar el flujo de las estructuras repetitivas
         boolean continuar = false;
         boolean entrada_valida = true;
-        
+
         // crear nuevo objeto para llenar la lista de empleados segun rol
         //ruta de archivo ../DatosEmpleados/DatosEmpleados.csv
         ImportarDatos importacion = new ImportarDatos();
         List<Empleado> empleados = new ArrayList<>();
+        String direccionDocumentoEmpleados = "..//DatosEmpleados//DatosEmpleados.csv";
         
-        empleados = importacion.ImportarEmpleados("..//DatosEmpleados//DatosEmpleados.csv");
-        //funcion para mostrar los empleados
-        inicio.MostrarEmpleados(empleados);
+        //iniciar importacion de los empleados y guardarlos en una lista
+        empleados = importacion.ImportarEmpleados(direccionDocumentoEmpleados);
         
-        // flujo principal
-        /*
+
+        // flujo principal de ejecucion
         do {
             inicio.Mostrar_menu();
             int opcion = teclado.nextInt();
@@ -41,8 +44,8 @@ public class Main {
                 entrada_valida = inicio.Validar_opcion(opcion);
             }
 
-            inicio.Realizar_opcion(opcion);
-            
+            inicio.Realizar_opcion(opcion, empleados, importacion);
+
             System.out.println();
             System.out.println("¿Desea Realizar otra operación? (y/n)");
             teclado.nextLine();
@@ -50,31 +53,42 @@ public class Main {
             continuar = inicio.Continuar_programa(eleccion);//hacer un ciclo repetitivo.
 
         } while (continuar == true);
-        */
+
     }
 
     // mostrar el menu de opciones
     private void Mostrar_menu() {
         System.out.println("-------------Empresa Automotriz [PERFECT CAR]-------------");
         System.out.println("MENÚ OPCIONES:");
-        System.out.println("1 - Ordenar y mostrar empleados alfabeticamente segun primer apellido.");
-        System.out.println("2 - Ordenar y mostrar empleados  por sueldo.");
-        System.out.println("3 - Mostrar cantidad de empleados según sus roles.");
-        System.out.println("4 - salir.");
+        System.out.println("1 - Mostrar Empleados.");
+        System.out.println("2 - Ordenar y mostrar empleados alfabeticamente segun primer apellido.");
+        System.out.println("3 - Ordenar y mostrar empleados  por sueldo.");
+        System.out.println("4 - Mostrar cantidad de empleados según sus roles.");
+        System.out.println("5 - salir.");
     }
 
     //realizar las opcciones segun menu de opciones
-    private void Realizar_opcion(int opcion) {
+    private void Realizar_opcion(int opcion, List<Empleado> empleados, ImportarDatos importacion) {
 
         switch (opcion) {
             case 1:
-                System.out.println("Eleccion 1");
+                System.out.println("Mostrando Empleados");
+                importacion.MostrarEmpleados(empleados);
                 break;
             case 2:
                 System.out.println("Eleccion 2");
+                List<Empleado> empleadosOrdenados = new ArrayList<>();
+                empleadosOrdenados = importacion.OrdenarEmpleados(empleados);
+                importacion.MostrarEmpleados(empleadosOrdenados);
                 break;
             case 3:
                 System.out.println("Eleccion 3");
+                List<Empleado> empleadoOrdenadoSalario = new ArrayList<>();
+                empleadoOrdenadoSalario = importacion.OrdernarEmpleadosSalario(empleados);
+                importacion.MostrarEmpleados(empleadoOrdenadoSalario);
+                break;
+            case 4:
+                System.out.println("Eleccion 4");
                 break;
             default:
                 System.out.println("Fallo");
@@ -97,28 +111,11 @@ public class Main {
             try {
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
             } catch (Exception e) {
-                
+
             }
             return true;
         }
         return false;
     }
-    
-    //funcion para mostrar la lista de empleados
-    private void MostrarEmpleados(List<Empleado> empleados){
-        int contador=0;
-        System.out.println("Nombres |Apellido |Direccion |Fecha de Nacimiento |Sexo |Rol");
-        for(Empleado cadaEmpleado : empleados){
-            System.out.print(cadaEmpleado.GetNombre() + " - ");
-            System.out.print(cadaEmpleado.GetApellido() + " - ");
-            //System.out.print(cadaEmpleado.GetDireccion() + " - ");
-            //System.out.print(cadaEmpleado.GetFechaNacimiento() + " - ");
-            //System.out.print(cadaEmpleado.GetSexo() + " - ");
-            System.out.print(cadaEmpleado.GetRolEmpleado() + " - ");
-            System.out.print("$" + cadaEmpleado.GetSalarioNeto()+ " - ");
-            System.out.print("$" + cadaEmpleado.salarioBase + " - ");
-            System.out.println("AFP %" + cadaEmpleado.DescuentoAFP()+ " ");
-            
-        }
-    }
+
 }
