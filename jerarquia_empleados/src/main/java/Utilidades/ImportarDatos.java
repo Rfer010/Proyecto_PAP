@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ClasesUtilitarias;
+package Utilidades;
 // importaciones de las clases para dividirlas en base a su tipo de rol
 
 import JerarquiaEmpleados.Empleado;
