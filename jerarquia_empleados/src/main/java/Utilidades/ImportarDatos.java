@@ -26,11 +26,15 @@ public class ImportarDatos {
 
     // metodo para realizar importacion de los datos desde un archivo externo
     public List<Empleado> ImportarEmpleados(String direccionArchivo) {
-        // lista para guardar todos los objetos
         List<Empleado> empleados = new ArrayList<>();
-        //usamos try-buffer-resources para abrir y cerrar automaticamente el archivo
+        
+        //funcion para determinar si reconoce la ruta estandar, si no la reconoce se ejecuta
+           java.io.File archivo = new java.io.File(direccionArchivo);
+           if(!archivo.exists()){
+               direccionArchivo = "..//" + direccionArchivo;
+           }
+           
         try (BufferedReader br = new BufferedReader(new FileReader(direccionArchivo))) {
-
             String texto;
 
             while ((texto = br.readLine()) != null) {

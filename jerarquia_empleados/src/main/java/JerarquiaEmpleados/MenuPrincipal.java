@@ -28,7 +28,7 @@ public class MenuPrincipal {
 
         ImportarDatos importacion = new ImportarDatos();
         //ruta de archivo ../DatosEmpleados/DatosEmpleados.csv
-        String direccionDocumentoEmpleados = "..//DatosEmpleados//DatosEmpleados.csv";
+        String direccionDocumentoEmpleados = "DatosEmpleados//DatosEmpleados.csv";
 
         //iniciar importacion de los empleados y guardarlos en una lista
         empleados = importacion.ImportarEmpleados(direccionDocumentoEmpleados);
@@ -118,6 +118,7 @@ public class MenuPrincipal {
     //funcion para limpiar la pantalla en consola 
     private void LimpiarPantalla(Scanner detener){
         System.out.println("Precione Enter para continuar");
+        detener.nextLine();
         detener.nextLine();
           try {
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
